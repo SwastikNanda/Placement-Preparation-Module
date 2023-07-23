@@ -1,0 +1,48 @@
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        // if(nums.size()==2 && nums[0]!=nums[1]){
+        //     return nums;
+        // }
+
+        int count1=0,count2=0;
+        int candidate1=0,candidate2=0;
+        for(int i=0;i<nums.size();i++){
+          if(candidate1==nums[i]){
+              count1++;
+          }
+          else if(candidate2==nums[i]){
+              count2++;
+          }
+          
+              else if(count1==0 && nums[i]!=candidate2){
+                  candidate1=nums[i];count1++;
+              }
+              else if(count2==0 && nums[i]!=candidate2){
+                  candidate2=nums[i];count2++;
+              }
+              else{
+                  count1--;
+                  count2--;
+              }
+     }
+
+        count1=0;count2=0;
+        for(int i=0;i<nums.size();i++){
+            if(candidate1==nums[i]){
+             count1++;
+            }
+            else if(candidate2==nums[i]){
+                count2++;
+            }
+        }
+         vector<int> arr;
+        if(count1>(nums.size()/3)){
+           arr.push_back(candidate1);
+        }
+        if(count2>(nums.size()/3)){
+            arr.push_back(candidate2);
+        }
+        return arr;
+    }
+};
