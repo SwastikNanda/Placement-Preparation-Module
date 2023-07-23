@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        long int min=INT_MAX;
+        long int profit=INT_MIN;
+        for(auto itr: prices){
+            if(itr<min){
+                min=itr;
+            }
+            if((itr-min)>profit){
+                profit=itr-min;
+            }
+        }
+        return profit;
+    }
+};
