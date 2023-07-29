@@ -1,0 +1,23 @@
+class Solution{
+    public:
+    int findPlatform(int arr[], int dep[], int n)
+    {
+            
+            vector<int>ar(arr,arr+n);
+            vector<int>de(dep,dep+n);
+        
+          sort(ar.begin(),ar.end());
+          sort(de.begin(),de.end());
+          int ans=0;
+          
+          for(int i=0;i<n;i++)
+          {
+            int idx= upper_bound(ar.begin(),ar.end(),de[i])-ar.begin();
+            idx--;
+            ans=max(ans,idx-i+1);
+          }
+          
+          return ans;
+    }
+
+};
