@@ -1,0 +1,89 @@
+1 TWO SUM
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& arr, int target) {
+        unordered_map<int,int> map;
+        vector<int> ans;
+        for(int i=0;i<arr.size();i++){
+            if(map.find(target-arr[i])!=map.end()){
+                ans.push_back(map[target-arr[i]]);
+                ans.push_back(i);
+                return ans;
+            }
+            map[arr[i]]=i;
+        }
+        return ans;
+    }
+};
+
+
+
+128. Longest Consecutive Sequence
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        if(nums.size()==0){
+            return 0;
+        }
+        set<int> s;
+        for(auto itr: nums){
+            s.insert(itr);
+        }
+        int j=1;
+        int seq=0;
+        int maxseq=INT_MIN;
+        for(auto itr: s){
+            if(s.find(itr-1)==s.end()){
+                j=0;
+                seq=0;
+                while(s.find(itr+j)!=s.end()){
+                  j++;
+                  seq++;
+                }
+                if(seq>maxseq){
+                    maxseq=seq;
+                }
+            }
+        }
+        return maxseq;
+    }
+};
+
+
+3. Longest Substring Without Repeating Characters
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        string res="";
+        unordered_map<char,int>mp;
+        int i=0,ans=0;
+        while(i<s.size())
+        {
+            while(i<s.size() && (mp.find(s[i])==mp.end() || mp[s[i]]==0) )
+            {
+                res=res+s[i];
+                mp[s[i]]++;
+                int size=res.size();
+                ans = max(ans,size);
+                i++;
+            }
+            if(i<s.size()){
+            while( mp[s[i]]!=0)
+            {
+                 mp[res[0]]--;
+                if(res.size()>=2)
+                  res=res.substr(1,res.size());
+                else
+                    res="";
+            }
+            res=res+s[i];
+            mp[s[i]]++;
+            i++;
+            }
+        }
+        return ans;
+    }
+};
